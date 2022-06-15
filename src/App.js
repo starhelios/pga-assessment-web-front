@@ -205,7 +205,7 @@ function App() {
   );
 
   const fetchSchedules = async () => {
-    const { data } = await axios.get(process.env.REACT_APP_API_URL);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}api/all`);
     const tempData = tableData.map((_data) => {
       const originData = data.data.find((_d) => _d.time === _data.time);
       if (originData) {
