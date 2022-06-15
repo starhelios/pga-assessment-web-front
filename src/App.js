@@ -1,4 +1,6 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, IconButton } from "@chakra-ui/react";
+import { FaCheck } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table";
@@ -63,6 +65,7 @@ function Table({ columns, data, setSelectRow, openModal, cancelBook }) {
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
+            <th></th>
           </tr>
         ))}
       </thead>
@@ -70,10 +73,27 @@ function Table({ columns, data, setSelectRow, openModal, cancelBook }) {
         {rows.map((row, i) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()} onClick={() => getRowValue(row)}>
+            <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
               })}
+              {!row.original._id ? (
+                <td>
+                  <IconButton
+                    aria-label="Book"
+                    icon={<FaCheck />}
+                    onClick={() => getRowValue(row)}
+                  />
+                </td>
+              ) : (
+                <td>
+                  <IconButton
+                    aria-label="Cancel Book"
+                    icon={<MdClose />}
+                    onClick={() => getRowValue(row)}
+                  />
+                </td>
+              )}
             </tr>
           );
         })}
