@@ -205,7 +205,7 @@ function App() {
   );
 
   const fetchSchedules = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/all");
+    const { data } = await axios.get(process.env.REACT_APP_API_URL);
     const tempData = tableData.map((_data) => {
       const originData = data.data.find((_d) => _d.time === _data.time);
       if (originData) {
@@ -223,7 +223,7 @@ function App() {
 
   const handleBook = (time, name, phone) => {
     axios
-      .post("http://localhost:4000/api/create", {
+      .post(`${process.env.REACT_APP_API_URL}api/create`, {
         time,
         name,
         phone,
@@ -249,7 +249,7 @@ function App() {
       return _data;
     });
     setTableData(tempData);
-    axios.post("http://localhost:4000/api/cancel", { id });
+    axios.post(`${process.env.REACT_APP_API_URL}api/cancel`, { id });
   };
 
   return (
