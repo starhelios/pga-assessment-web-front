@@ -1,6 +1,5 @@
 import { ChakraProvider, IconButton } from "@chakra-ui/react";
 import { FaCheck, FaTrashAlt } from "react-icons/fa";
-// import { MdClose } from "react-icons/md";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table";

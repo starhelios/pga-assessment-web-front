@@ -24,7 +24,8 @@ import * as Yup from "yup";
 
 export function BookModal(props) {
   const { isOpen, onClose, data, onClick } = props;
-
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -32,11 +33,12 @@ export function BookModal(props) {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Name is required."),
-      phone: Yup.string().required("Phone Number is required."),
+      phone: Yup.string()
+        .required("Phone Number is required.")
+        .matches(phoneRegExp, "Phone Number is not valid"),
     }),
     onSubmit: async (values) => {
       const { name, phone } = values;
-      console.log({ name, phone });
       try {
         onClick(data.time, name, phone);
       } catch (e) {
@@ -47,8 +49,16 @@ export function BookModal(props) {
 
   const ErrorText = (props) => <Text color="#FF5656">{props.children}</Text>;
 
+  const handleModalClose = () => {
+    formik.setValues({
+      name: "",
+      phone: "",
+    });
+    onClose();
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
+    <Modal isOpen={isOpen} onClose={handleModalClose} isCentered size="xl">
       <ModalOverlay />
       <ModalContent rounded="2xl" top={0}>
         <ModalHeader p={0}>
@@ -84,7 +94,7 @@ export function BookModal(props) {
                 )}
               </FormControl>
               <HStack spacing={4} justifyContent="flex-end">
-                <Button colorScheme="red" onClick={onClose}>
+                <Button colorScheme="red" onClick={handleModalClose}>
                   Cancel
                 </Button>
 
