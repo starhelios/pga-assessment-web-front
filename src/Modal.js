@@ -58,7 +58,7 @@ export function BookModal(props) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleModalClose} isCentered size="xl">
+    <Modal isOpen={isOpen} onClose={handleModalClose} isCentered size="lg">
       <ModalOverlay />
       <ModalContent rounded="2xl" top={0}>
         <ModalHeader p={0}>
@@ -72,7 +72,7 @@ export function BookModal(props) {
               <FormControl>
                 <Input
                   name="name"
-                  placeholder="Name"
+                  placeholder="Jone Doe"
                   isInvalid={!!formik.errors.name}
                   value={formik.values.name}
                   onChange={formik.handleChange}
@@ -84,7 +84,7 @@ export function BookModal(props) {
               <FormControl>
                 <Input
                   name="phone"
-                  placeholder="Phone Number"
+                  placeholder="123-456-7890"
                   isInvalid={!!formik.errors.phone}
                   value={formik.values.phone}
                   onChange={formik.handleChange}
