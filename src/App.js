@@ -80,6 +80,7 @@ function Table({ columns, data, setSelectRow, openModal, cancelBook }) {
                 <td>
                   <IconButton
                     aria-label="Book"
+                    colorScheme="blue"
                     icon={<FaCheck />}
                     onClick={() => getRowValue(row)}
                   />
@@ -88,6 +89,7 @@ function Table({ columns, data, setSelectRow, openModal, cancelBook }) {
                 <td>
                   <IconButton
                     aria-label="Cancel Book"
+                    colorScheme="red"
                     icon={<FaTrashAlt />}
                     onClick={() => getRowValue(row)}
                   />
